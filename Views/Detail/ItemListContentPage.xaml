@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CustomMasterDetail.ItemListContentPage">
+	<ContentPage.Content>
+		<Grid BackgroundColor="White">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="60" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<BoxView Grid.Row="0" BackgroundColor="Blue" />
+
+			<Button Grid.Row="0"
+					Text="Menu"
+					HorizontalOptions="Start"
+					VerticalOptions="Center"
+					TextColor="White"
+					FontSize="13"
+					FontAttributes="None"
+				    Clicked="handleMenuButtonTapped" />
+
+			<Label Grid.Row="0"
+				   Text="Pick an Item"
+				   HorizontalOptions="Center"
+				   VerticalOptions="Center" 
+				   FontSize="17"
+				   TextColor="White" />
+
+			<ListView Grid.Row="1"
+					  x:Name="ItemListView"
+					  BackgroundColor="Transparent"
+					  RowHeight="60"
+					  ItemsSource="{Binding Items}"
+					  ItemSelected="handleItemSelected">
+
+				<ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding .}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+			</ListView>
+			
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

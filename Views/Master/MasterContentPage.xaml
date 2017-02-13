@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+		     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		     x:Class="CustomMasterDetail.MasterContentPage"
+		     Title="Menu">
+	<ContentPage.Content>
+		<Grid BackgroundColor="White">
+			
+			<Grid.RowDefinitions>
+				<RowDefinition Height="100"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="44" />
+			</Grid.RowDefinitions>
+
+			<BoxView Grid.Row="0" BackgroundColor="Navy" />
+			
+			<Label Grid.Row="0" 
+				   Text="Menu" 
+				   HorizontalOptions="Center" 
+				   VerticalOptions="Center" 
+				   TextColor="White" 
+				   FontSize="24" 
+				   FontAttributes="Bold" />
+			
+			<BoxView Grid.Row="2" BackgroundColor="Silver" />
+			
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+	<style name="custom" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="windowNoTitle">true</item>
+		<item name="windowActionBar">false</item>
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:actionBarSize">0dp</item>
+		<item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless</item>
+	</style>
+	
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{DADCD546-2683-4EA1-BCFE-CB05D6C12BC9}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CustomMasterDetail</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CustomMasterDetailPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Master\MasterContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Detail\ItemListContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Detail\ItemContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\Detail\MainNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CustomMasterDetailPage.xaml.cs">
+      <DependentUpon>CustomMasterDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Master\MasterContentPage.xaml.cs">
+      <DependentUpon>MasterContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Singletons\NavigationManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Detail\ItemListContentPage.xaml.cs">
+      <DependentUpon>ItemListContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Detail\ItemContentPage.xaml.cs">
+      <DependentUpon>ItemContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Detail\ItemListContentPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Base\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Master\MainMasterDetailPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Detail\MainNavigationPage.xaml.cs">
+      <DependentUpon>MainNavigationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\INativeItemView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Singletons\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Master\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Detail\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Base\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Interfaces\" />
+  </ItemGroup>
+</Project>
