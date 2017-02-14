@@ -30,9 +30,9 @@ namespace Xamarin.Forms.Platform.Android
 			get { return _presented; }
 			set
 			{
-				if(_page.IsEnabled)
+				if (_page.IsEnabled)
 				{
-					if(value != _presented)
+					if (value != _presented)
 					{
 						_presented = value;
 
@@ -46,7 +46,7 @@ namespace Xamarin.Forms.Platform.Android
 						}
 					}
 				}
-				else if(_page.IsPresented || _presented)
+				else if (_page.IsPresented || _presented)
 				{
 					_presented = false;
 					CloseDrawer(_masterLayout);
@@ -115,12 +115,18 @@ namespace Xamarin.Forms.Platform.Android
 
 			AddDrawerListener(this);
 			Tracker = new VisualElementTracker(this);
+
+			//events
+
+			ViewTreeObserver.GlobalLayout += handleGlobalLayout;
 		}
 
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
 			{
+				ViewTreeObserver.GlobalLayout -= handleGlobalLayout;
+
 				RemoveDrawerListener(this);
 
 				if (Tracker != null)
@@ -295,6 +301,16 @@ namespace Xamarin.Forms.Platform.Android
 
 		#endregion
 
+		#region manual layout
+
+		private void handleGlobalLayout(object sender, EventArgs e)
+		{
+			_detailLayout?.MeasureAndLayoutNative();
+			_masterLayout?.MeasureAndLayoutNative();
+		}
+
+		#endregion
+
 		#region post property change updates
 
 		private void handlePropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -321,7 +337,7 @@ namespace Xamarin.Forms.Platform.Android
 
 		private void updatePanGesture()
 		{
-			if(_page != null)
+			if (_page != null)
 			{
 				SetDrawerLockMode(_page.IsGestureEnabled ? LockModeUnlocked : LockModeLockedClosed);
 			}

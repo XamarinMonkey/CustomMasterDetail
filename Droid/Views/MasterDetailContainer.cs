@@ -37,8 +37,8 @@ namespace Xamarin.Forms.Platform.Android
 			_isMaster = isMaster;
 		}
 
-		public MasterDetailContainer(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer) 
-		{ 
+		public MasterDetailContainer(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+		{
 		}
 
 		protected override void Dispose(bool disposing)
@@ -48,7 +48,7 @@ namespace Xamarin.Forms.Platform.Android
 				_parent = null;
 				RemoveAllViews();
 
-				if(_childView != null)
+				if (_childView != null)
 				{
 					Platform.GetRenderer(_childView)?.Dispose();
 					_childView = null;
@@ -66,7 +66,7 @@ namespace Xamarin.Forms.Platform.Android
 		{
 			_parent = parent;
 
-			VisualElement view = (_isMaster)? parent.Master : parent.Detail;
+			VisualElement view = (_isMaster) ? parent.Master : parent.Detail;
 			if (_childView != view)
 			{
 				RemoveAllViews();
@@ -110,20 +110,37 @@ namespace Xamarin.Forms.Platform.Android
 
 		#region layout
 
+		public void MeasureAndLayoutNative()
+		{
+			if (_childView != null)
+			{
+				IVisualElementRenderer renderer = Platform.GetRenderer(_childView);
+				if (renderer.ViewGroup != null)
+				{
+					var nativeView = renderer.ViewGroup;
+
+					var w = MeasureSpec.MakeMeasureSpec(nativeView.MeasuredWidth, MeasureSpecMode.Exactly);
+					var h = MeasureSpec.MakeMeasureSpec(nativeView.MeasuredHeight, MeasureSpecMode.Exactly);
+					nativeView.Measure(w, h);
+					nativeView.Layout(nativeView.Left, nativeView.Top, nativeView.Right, nativeView.Bottom);
+				}
+			}
+		}
+
 		protected override void OnLayout(bool changed, int l, int t, int r, int b)
 		{
-			if(changed && _childView != null)
+			if (changed && _childView != null)
 			{
 				IMasterDetailPageController masterDetailPageController = (_parent as IMasterDetailPageController);
-				if(masterDetailPageController != null)
+				if (masterDetailPageController != null)
 				{
-					if(_isMaster)
+					if (_isMaster)
 					{
-						masterDetailPageController.MasterBounds = getMasterBounds(l,t,r,b);
+						masterDetailPageController.MasterBounds = getMasterBounds(l, t, r, b);
 					}
 					else
 					{
-						masterDetailPageController.DetailBounds = getDetailBounds(l,t,r,b);
+						masterDetailPageController.DetailBounds = getDetailBounds(l, t, r, b);
 					}
 				}
 
@@ -133,16 +150,16 @@ namespace Xamarin.Forms.Platform.Android
 
 		private double getOffsetY()
 		{
-			if(_statusBarPxHeight == null)
+			if (_statusBarPxHeight == null)
 			{
-				int resourceId = Resources.GetIdentifier ("status_bar_height", "dimen", "android");
-				if (resourceId > 0) 
+				int resourceId = Resources.GetIdentifier("status_bar_height", "dimen", "android");
+				if (resourceId > 0)
 				{
 					_statusBarPxHeight = Resources.GetDimensionPixelSize(resourceId);
 				}
 			}
 
-			return Context.FromPixels((double) _statusBarPxHeight);
+			return Context.FromPixels((double)_statusBarPxHeight);
 		}
 
 		private Rectangle getMasterBounds(int left, int top, int right, int bottom)
